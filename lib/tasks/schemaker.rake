@@ -28,7 +28,7 @@ namespace :schemaker do
 
     # Load our application
     Rails.application.eager_load!
-    models = ActiveRecord::Base.descendants.collect { |type| type }
+    models = ActiveRecord::Base.descendants.map{|x| (x.name.split('::').length > 1) ? x.name.split('::').last : x.name } { |type| type }
     scalar_types = [:string, :integer, :float, :id, :boolean]
 
     # Determine whether to do snake case or camel case
